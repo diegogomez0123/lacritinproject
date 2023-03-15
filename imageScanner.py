@@ -23,7 +23,7 @@ args = vars(ap.parse_args())
 
 #import image, resize and grayscale. Keep original and resized size ratio to scale back up later
 image = cv2.imread(args["image"])
-resized = imutils.resize(image, width=1000)
+resized = imutils.resize(image, width=1450)
 ratio = image.shape[0] / float(resized.shape[0])
 gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
 
@@ -50,7 +50,7 @@ for c in contour :
         
         shape = "unidentified"
         peri = cv2.arcLength(c, True)
-        approx = cv2.approxPolyDP(c, 0.02 * peri, True) #above 0.02 and CV detects many non-squares
+        approx = cv2.approxPolyDP(c, 0.015 * peri, True) #above 0.02 and CV detects many non-squares
     
         if len(approx) == 4:
             (x, y, w, h) = cv2.boundingRect(approx)
@@ -59,7 +59,7 @@ for c in contour :
 
         elif len(approx) == 3:
             shape = "triangle"
-        elif len(approx) >= 5:
+        elif len(approx) >= 4:
             shape = "somethingelse"
         else:
             shape = "circle"
@@ -77,10 +77,10 @@ for c in contour :
         
         
 #image output, comment out for rivanna
-cv2.imshow("Image", image)
+#cv2.imshow("Image", image)
 #cv2.imshow("thresh", thresh)
 #cv2.imshow("gray", gray)
-cv2.waitKey(0)
+#cv2.waitKey(0)
 result = len(square_dict)
 #comment out this and most prints
 print(result)
