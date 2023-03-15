@@ -11,9 +11,6 @@ import cv2
 import math
 import numpy
 
-#Test Case
-#"C:\Users\Diego G\Documents\LabWork\Pepwheel\pepwheel.1.png"
-
 square_dict = {}
 
 ap = argparse.ArgumentParser()
@@ -74,17 +71,14 @@ for c in contour :
                 square_dict.update({"square" + str(count): cpair})
                 count += 1
                 
-        
-        
 #image output, comment out for rivanna
 #cv2.imshow("Image", image)
 #cv2.imshow("thresh", thresh)
 #cv2.imshow("gray", gray)
 #cv2.waitKey(0)
 result = len(square_dict)
-#comment out this and most prints
-print(result)
-print(square_dict)
+#print(result)
+#print(square_dict)
 
 
 center_list = list(square_dict.values())
@@ -98,7 +92,6 @@ for i in center_list:
         dists[dist_index].append(math.dist(i, j))
     dist_index += 1
             
-#print(dists)
 
 #cleans dists array by removing values from calculating a square's distance to itself for each sub-array
 #removes outlier distances to prevent single residues cross-helix to a main cluster increasing means
@@ -161,7 +154,7 @@ print(TMF)
 FinalMean = numpy.mean(TMF)
 print(FinalMean)
 
-#arbitrary cutoff, narrow down with examples
+#arbitrary cutoff, narrowed down with examples
 if FinalMean <= 130:
     print("Check Further") 
 
